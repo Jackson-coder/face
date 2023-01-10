@@ -68,14 +68,16 @@ class Face(object):
             print("Sussessfully Deleted.")
     
     def recognize(self, video_frame):
+        max_score = 0
+        match_user = None
+
         faces = self.detector.detect(video_frame)[1]
+        if faces is None:
+            return match_user
         face = faces[0][:-1] # take the first face and filter out 
         aligned_face = self.recognizer.alignCrop(video_frame, face)
         feature = self.recognizer.feature(aligned_face)
 
-        
-        max_score = 0
-        match_user = None
 
         if(len(self.feature_buffer))!=0:
             for user_name, featureB in zip(self.user_buffer, self.feature_buffer):
@@ -165,10 +167,10 @@ def detectMouseClick(event,x,y,flags,param):
         
 if __name__ == '__main__':
     # Step 2: load image
-    img1 = cv.imread("3.png")
-    img2 = cv.imread("4.png")
-    img1 = cv.resize(img1, (640, 480))
-    img2 = cv.resize(img2, (640, 480))
+    # img1 = cv.imread("3.png")
+    # img2 = cv.imread("4.png")
+    # img1 = cv.resize(img1, (640, 480))
+    # img2 = cv.resize(img2, (640, 480))
     points = [[0,0]]
 
     regist_flag = False
@@ -177,14 +179,18 @@ if __name__ == '__main__':
     cv.namedWindow('img')
     cv.setMouseCallback('img',detectMouseClick)
 
+    capture = cv.VideoCapture(0)
     face = Face()
     string = ''
 
     i = 0
     while True:
         i+=1
+        ret, frame = capture.read()
         if i%10!=0:
             continue
+        
+        img1 = cv.resize(frame, (640, 480))
 
         x,y = points[-1]
         if x>20 and x<180 and y>20 and y<60 and delete_flag == False:
@@ -226,6 +232,8 @@ if __name__ == '__main__':
                 print(match_user)
 
         cv.imshow('img',img)
+    cv.destroyAllWindows()
+    
     # face.regist(img1, 'A')
     # face.regist(img1, 'A')
     # face.recognize(img2)
