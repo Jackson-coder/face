@@ -192,10 +192,6 @@ if __name__ == '__main__':
         elif x>20 and x<180 and y>80 and y<120 and regist_flag == False:
             delete_flag = True
 
-        # if regist_flag == True:
-        #     print('A+')
-        # user_name = 'A'
-
         if regist_flag == True:
             img = face.put_mask(img1, RegistName=string)
         elif delete_flag == True:
@@ -204,6 +200,12 @@ if __name__ == '__main__':
             img = face.put_mask(img1)
 
         c = cv.waitKey(1)
+
+        if c==27: #退出
+            face.update()#每个程序都要有
+            print('Exit!')
+            break
+
         if c>0 and (c>=ord('a') and c<=ord('z')) or (c>=ord('A') and c<=ord('Z')):
             string += chr(c)
             # print(string)
@@ -230,7 +232,7 @@ if __name__ == '__main__':
     # # face.update()
     # # face.recognize(img2)
     # face.delete('A')
-    face.update()#每个程序都要有
+    
 
     # print(score)
     
