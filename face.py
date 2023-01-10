@@ -183,6 +183,22 @@ if __name__ == '__main__':
     face = Face()
     string = ''
 
+    cv.namedWindow('User Guide')
+    zeros = np.ones((320,700,3), dtype=np.uint8)*255
+    cv.putText(zeros, 'User Guide', (20,50), cv.FONT_HERSHEY_SIMPLEX, 0.75, (0, 0, 255), 2)
+    cv.putText(zeros, '1.Regist or Delete SHOULD Click the button and input', (20,70), cv.FONT_HERSHEY_SIMPLEX, 0.75, (0, 0, 255), 2)
+    cv.putText(zeros, '  the corresponding username.', (20,90), cv.FONT_HERSHEY_SIMPLEX, 0.75, (0, 0, 255), 2)
+    cv.putText(zeros, '2.Repeatedly Click the Regist or Delete button BUT ', (20,120), cv.FONT_HERSHEY_SIMPLEX, 0.75, (0, 0, 255), 2)
+    cv.putText(zeros, '  without press the ENTER key on your keyboard will', (20,140), cv.FONT_HERSHEY_SIMPLEX, 0.75, (0, 0, 255), 2)
+    cv.putText(zeros, '  be ignored, the system will only remember the ', (20,160), cv.FONT_HERSHEY_SIMPLEX, 0.75, (0, 0, 255), 2)
+    cv.putText(zeros, '  FIRST CLICK.', (20,180), cv.FONT_HERSHEY_SIMPLEX, 0.75, (0, 0, 255), 2)
+    cv.putText(zeros, '3.The system will record the identities in a database', (20,210), cv.FONT_HERSHEY_SIMPLEX, 0.75, (0, 0, 255), 2)
+    cv.putText(zeros, '  for future use.', (20,230), cv.FONT_HERSHEY_SIMPLEX, 0.75, (0, 0, 255), 2)
+    cv.putText(zeros, '4.You can press the ESC key on your keyboard to ', (20,260), cv.FONT_HERSHEY_SIMPLEX, 0.75, (0, 0, 255), 2)
+    cv.putText(zeros, '  exit the system.', (20,280), cv.FONT_HERSHEY_SIMPLEX, 0.75, (0, 0, 255), 2)
+    cv.putText(zeros, '5.Close this prompt to continue using.', (20,310), cv.FONT_HERSHEY_SIMPLEX, 0.75, (0, 0, 255), 2)
+    cv.imshow('User Guide', zeros)
+
     i = 0
     while True:
         i+=1
